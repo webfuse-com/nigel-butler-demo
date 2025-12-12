@@ -1,0 +1,423 @@
+/* Global theme tokens aligned with landing page */
+:root {
+  --text-main: #1c2c3e;
+  --text-soft: #2e455e;
+  --accent: #eb6f59;
+  --surface: #ffffff;
+  --border-soft: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Window */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgb(235 111 89 / 9%), transparent 55%),
+    radial-gradient(circle at bottom right, rgb(28 44 62 / 7%), #0000000a 60%),
+    linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #fdf7f3 100%);
+  color: var(--text-main);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  overflow: hidden;
+}
+
+/* Ensure children paint above ::before glass overlays */
+.va-root>*,
+.va-topbar>*,
+.va-connected>*,
+.va-chat>*,
+.va-inputrow>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* Root container (three rows: topbar, main, input) */
+.va-root {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  overflow: clip;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  isolation: isolate;
+  background-color: transparent;
+}
+
+/* ---------------------- Top bar ---------------------- */
+.va-topbar {
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  align-items: center;
+  padding: 8px 10px;
+  min-height: 64px;
+  position: relative;
+  background: var(--text-main);
+  isolation: isolate;
+}
+
+.va-topbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  clip-path: inset(0 round inherit);
+}
+
+.va-topbar-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.va-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--surface);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* Status color hooks (JS can change data-status on .va-root) */
+
+.va-root[data-status="listening"] .va-status-dot {
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
+}
+
+.va-root[data-status="thinking"] .va-status-dot {
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.18);
+}
+
+.va-root[data-status="speaking"] .va-status-dot {
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.18);
+}
+
+/* Small avatar in the header */
+.va-avatar {
+  display: inline-grid;
+  place-items: center;
+}
+
+.va-avatar--sm {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--text-main);
+}
+
+/* ---------------------- Connected ---------------------- */
+.va-connected {
+  display: none;
+  height: 100%;
+  grid-template-rows: 1fr auto;
+  min-height: 0;
+}
+
+.va-root[data-state="connected"] .va-connected {
+  display: grid;
+}
+
+/* Chat area */
+.va-chat {
+  border-radius: 0px;
+  overflow: auto;
+  min-height: 0;
+  padding: 12px 12px 8px 12px;
+  position: relative;
+  isolation: isolate;
+  background: #f8fafc;
+}
+
+.va-chat::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.va-chat::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.7);
+  border-radius: 4px;
+}
+
+.va-chat::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Ensure grid children can shrink within the fixed popup */
+.va-root,
+.va-topbar,
+.va-connected,
+.va-inputrow {
+  min-height: 0;
+}
+
+/* Message rows */
+.va-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.va-row.agent {
+  justify-content: flex-start;
+}
+
+.va-row.user {
+  justify-content: flex-end;
+}
+
+.va-orb-photo {
+  width: 100%;
+  animation: orbBob 3.2s ease-in-out infinite;
+  will-change: transform;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes orbBob {
+  0% {
+    transform: translateY(2px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+/* Small bullet for agent rows */
+.va-bullet {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 auto;
+  background: #f8fafc;
+  border: 1px solid var(--border-soft);
+}
+
+/* Bubbles */
+.va-bubble {
+  display: inline-block;
+  max-width: 85%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid var(--border-soft);
+}
+
+.va-bubble.agent {
+  background: var(--text-soft);
+  color: var(--border-soft);
+}
+
+.va-bubble.user {
+  background: var(--text-main);
+  color: #ffffff;
+  border-color: rgba(15, 23, 42, 0.3);
+}
+
+.va-bubble.user.interim {
+  opacity: 0.8;
+}
+
+/* ---------------------- Input row ---------------------- */
+.va-inputrow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  padding: 10px;
+  position: relative;
+  isolation: isolate;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden;
+}
+
+.va-inputrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.va-input {
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  color: var(--text-main);
+  border: 3px solid var(--text-main);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.va-input::placeholder {
+  color: rgb(198, 198, 198);
+}
+
+.va-input::placeholder:focus {
+  color: transparent;
+}
+
+.va-input:focus {
+  border: 3px solid var(--text-soft);
+  outline: none;
+}
+
+.va-input-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.va-iconbtn,
+.va-endbtn {
+  appearance: none;
+  border: 3px solid var(--text-main);
+  background: var(--text-soft);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 6px 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-shadow: none;
+  transition: background 120ms ease, border-color 120ms ease, transform 80ms ease;
+}
+
+.va-icon {
+  display: block;
+}
+
+/* -------------- Utilities -------------- */
+[hidden] {
+  display: none !important;
+}
+
+/* New muted button highlight style */
+.va-iconbtn.is-muted {
+  background: var(--accent);
+  border-color: var(--text-main);
+  box-shadow: none;
+}
+
+/* Optional: subtle glass border highlight on container edges */
+.va-root {
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  border-radius: inherit;
+  clip-path: inset(0 round inherit);
+}
+
+.va-status-favicon {
+  vertical-align: -2px;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+}
+
+/* Drag cursor indicator */
+#drag {
+  cursor: grab;
+}
+
+#drag:active {
+  cursor: grabbing;
+}
+
+/* MOBILE VARIANT STYLES */
+@media (max-width: 150px) {
+  .va-chat {
+    display: none;
+  }
+
+  .va-input {
+    display: none;
+  }
+
+  .va-topbar-left {
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    max-width: 132px;
+    padding-top: 5px;
+    overflow: hidden;
+  }
+
+  .va-input-actions {
+    background-color: var(--text-main);
+    gap: 0px;
+  }
+
+  .va-input-actions button {
+    height: 70%;
+    width: 100%;
+    border-radius: 10px;
+    align-self: center;
+    padding: 0;
+  }
+
+  .va-status {
+    font-size: 10px;
+    min-width: 0;
+  }
+
+  .va-status-text {
+    display: block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .va-inputrow {
+    padding: 0;
+  }
+
+  .va-topbar {
+    padding: 0px;
+  }
+
+  .va-status-favicon {
+    display: none;
+  }
+
+  .va-avatar--sm {
+    width: 62px;
+    height: 52px;
+  }
+
+  .va-root {
+    background-color: var(--text-main);
+  }
+
+  #mic-icon svg {
+    width: 55px;
+    height: 55px;
+  }
+}

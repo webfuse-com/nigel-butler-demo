@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en" data-variant="desktop">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voice Agent</title>
+  <link rel="stylesheet" href="popup.css" />
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preload" as="image" href="nigel-chat.png" />
+</head>
+
+<body>
+  <!-- DESKTOP -->
+  <div class="va-root" data-state="connected" data-status="connecting" id="va-root">
+    <!-- Top bar: small orb + status -->
+    <header class="va-topbar" id="drag" aria-live="polite">
+      <div class="va-topbar-left">
+        <div class="va-avatar va-avatar--sm" aria-hidden="true">
+          <div class="va-orb-core">
+            <img src="nigel-icon.png" data-default-src="nigel-icon.png" alt="Profile" class="va-orb-photo" />
+          </div>
+        </div>
+        <div class="va-status">
+          <span class="va-status-text" id="va-status-text">Connecting…</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Connected state -->
+    <section class="va-connected" id="va-connected" aria-label="Conversation">
+      <div class="va-chat" id="chat" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+      <form class="va-inputrow" id="input-form" autocomplete="off">
+        <input id="chat-input" class="va-input" type="text" placeholder="Ask Nigel" aria-label="Message" />
+        <div class="va-input-actions">
+          <!-- Mute / Unmute -->
+          <button class="va-iconbtn" id="btn-mute" type="button" aria-label="Toggle microphone" title="Mute / Unmute">
+            <iconify-icon id="mic-icon" icon="mage:microphone" width="25" height="25"
+              style="color: #1c2c3e;"></iconify-icon>
+          </button>
+          <button class="va-endbtn" id="btn-end" type="submit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
+              <path fill="#ffffff"
+                d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2c4.41 0 8 3.59 8 8s-3.59 8-8 8s-8-3.59-8-8s3.59-8 8-8M9 9v6h6V9" />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- Keep script order; no changes requested -->
+  <script src="popup.agent.js"></script>
+  <script src="popup.action.js"></script>
+  <script src="popup.elevenlabs.js"></script>
+</body>
+
+</html>
