@@ -7,7 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <title>Nigel the coding Butler</title>
-  <link rel="icon" type="image/png" href="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true" />
+  <link rel="icon" type="image/png"
+    href="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true" />
 
   <style>
     :root {
@@ -34,7 +35,7 @@
         padding-top: 0;
       }
 
-      .icons > div {
+      .icons>div {
         gap: 10px;
       }
 
@@ -339,28 +340,6 @@
       height: 100vh;
     }
 
-    /* Wave background only – children can draw past it 
-    .nigel-graphic::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgb(235 111 89 / 9%), transparent 55%),
-        radial-gradient(circle at bottom right, rgb(28 44 62 / 7%), #0000000a 60%),
-        linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #fdf7f3 100%);
-      background-color: var(--text-main);
-      mask-image: var(--nigel-mask);
-      mask-size: 100% 100%;
-      mask-repeat: no-repeat;
-      -webkit-mask-image: var(--nigel-mask);
-      -webkit-mask-size: 100% 100%;
-      -webkit-mask-repeat: no-repeat;
-      pointer-events: none;
-      z-index: -1;
-    }
-      */
-
-
     @keyframes sweepDiag {
       from {
         background-position: 150% -50%;
@@ -535,8 +514,7 @@
       transform: scaleX(-1);
       /* crisp outline that follows the PNG silhouette, no glow */
       filter:
-        drop-shadow(0 0 0.6px var(--text-soft))
-        drop-shadow(0 1px 0.8px var(--text-soft));
+        drop-shadow(0 0 0.6px var(--text-soft)) drop-shadow(0 1px 0.8px var(--text-soft));
     }
 
     #nigelImg {
@@ -596,13 +574,65 @@
       transform-origin: center;
     }
 
+    .button-container {
+      width: 100%;
+      display: flex;
+      gap: 0px;
+      align-items: center;
+    }
+
+    /* Input styled to match the Call Nigel button */
+    .input-box {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      width: 40%;
+      height: 70px;
+      padding: 18px 0 18px 22px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      background-color: var(--surface-soft);
+      color: var(--text-main);
+      border-radius: 999px 0 0 999px;
+      border: 4px solid var(--surface-soft-dim);
+      border-right-width: 0 !important;
+      outline: none;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease,
+        border-color 0.18s ease,
+        background-color 0.18s ease,
+        color 0.18s ease,
+        opacity 0.25s ease;
+    }
+
+    .input-box::placeholder {
+      color: rgba(28, 44, 62, 0.65);
+      font-weight: 500;
+    }
+
+    .input-box:focus {
+      border-color: var(--accent);
+      border-right-width: 4px !important;
+    }
+
+    .input-box.is-ready {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .start-btn {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 20px;
-      width: 60%;
+      width: 20%;
       height: 70px;
       padding: 18px 32px;
       font-size: 1.9rem;
@@ -611,9 +641,8 @@
       line-height: 1;
       background-color: var(--surface-soft);
       color: var(--text-main);
-      border-radius: 999px;
+      border-radius: 0 999px 999px 0;
       border: 4px solid var(--surface-soft-dim);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
       cursor: pointer;
       transform-origin: center;
       transform: translateY(0);
@@ -627,7 +656,6 @@
       z-index: 999;
       opacity: 0;
       pointer-events: none;
-
     }
 
     .start-btn.is-ready {
@@ -643,13 +671,10 @@
       background-color: var(--accent);
       color: var(--surface-soft);
       border-color: var(--accent);
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-      transform: translateY(-2px);
     }
 
     .start-btn:active {
       transform: translateY(0);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
     }
 
     .start-btn .bell-icon {
@@ -726,7 +751,7 @@
 
     .arrow-btn {
       pointer-events: auto;
-      min-width: 25px; 
+      min-width: 25px;
       height: 30px;
       padding: 17px;
       border-radius: 12px;
@@ -757,6 +782,7 @@
       transform: translateY(0);
       box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
     }
+
     /* ==============================
        Mobile / Narrow Screens
        ============================== */
@@ -796,7 +822,8 @@
         justify-content: center;
         padding: 0;
         pointer-events: auto;
-        z-index: 11; /* override desktop z-index:-1 so taps reach the tiles */
+        z-index: 11;
+        /* override desktop z-index:-1 so taps reach the tiles */
       }
 
       .demo-reel {
@@ -823,8 +850,13 @@
       }
 
       @keyframes reelScrollX {
-        from { transform: translateX(-50%); }
-        to { transform: translateX(0%); }
+        from {
+          transform: translateX(-50%);
+        }
+
+        to {
+          transform: translateX(0%);
+        }
       }
 
       .demo-stack__item {
@@ -906,6 +938,7 @@
         margin: 0;
         transform: none;
       }
+
       .hero-heading-text {
         width: 100%;
         align-items: center;
@@ -966,6 +999,7 @@
         text-align: center;
         max-width: 100%;
       }
+
       /* Keep all content within the same readable width */
       .title-inner,
       .hero-info {
@@ -993,7 +1027,7 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: -6px;
-        padding-left: 8px; 
+        padding-left: 8px;
         padding-right: 8px;
       }
 
@@ -1004,7 +1038,7 @@
         padding-top: 20px;
       }
 
-      .icons > div {
+      .icons>div {
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -1051,14 +1085,83 @@
 
       /* Primary CTA */
       .start-btn {
-        width: 100%;
-        max-width: 400px;
-        height: 64px;
-        font-size: clamp(1.4rem, 2.4vw, 1.8rem);
-        margin-left: auto;
-        margin-right: auto;
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        margin-left: 0;
+        margin-right: 0;
+        cursor: pointer;
         margin-top: 0;
         justify-self: center;
+        padding: 0;
+        gap: 0;
+        border-radius: 0 999px 999px 0;
+        /* idle/load state */
+        background-color: var(--surface-soft);
+        border-color: var(--surface-soft-dim);
+        color: var(--text-main);
+      }
+
+      .start-btn__label {
+        display: none;
+      }
+
+      .start-btn .bell-icon {
+        width: 100%;
+        height: 100%;
+        border-radius: 0 999px 999px 0;
+        background: transparent;
+      }
+
+      .start-btn:focus .bell-icon,
+      .start-btn.is-calling .bell-icon,
+      .start-btn:hover .bell-icon {
+        background-color: var(--accent);
+      }
+
+      /* idle/load state bell color */
+      .start-btn .bell-icon svg {
+        stroke: var(--accent);
+      }
+
+      /* clicked/active state: orange button + white bell */
+      .start-btn.is-calling {
+        border-color: var(--accent);
+        color: var(--surface-soft);
+      }
+
+      .start-btn:focus .bell-icon svg,
+      .start-btn:hover .bell-icon svg,
+      .start-btn.is-calling .bell-icon svg {
+        stroke: var(--surface-soft);
+      }
+
+      /* mobile hover / active / focus feedback */
+
+
+      /* ring once when triggered */
+      .start-btn .bell-icon svg.ring-once {
+        animation: bell-ring 0.7s ease-in-out 1;
+      }
+
+      .button-container {
+        flex-direction: row;
+        gap: 0;
+        width: 100%;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 6px;
+        align-items: stretch;
+      }
+
+      .input-box {
+        width: 100%;
+        height: 60px;
+        font-size: clamp(1.15rem, 2.1vw, 1.45rem);
+        padding: 12px 14px 12px 18px;
+        border-radius: 999px 0 0 999px;
+        border-right-width: 0 !important;
       }
     }
   </style>
@@ -1068,16 +1171,24 @@
   <div class="page">
     <section class="title-section">
       <div class="title-wrapper">
-        <img id="nigelImg" class="nigel-img" src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel.png?raw=true" alt="Nigel, your coding butler" />
-        <img id="nigelImgFront" class="nigel-img" src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel.png?raw=true" alt="Nigel, your coding butler (front overlay)" />
+        <img id="nigelImg" class="nigel-img"
+          src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel.png?raw=true"
+          alt="Nigel, your coding butler" />
+        <img id="nigelImgFront" class="nigel-img"
+          src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel.png?raw=true"
+          alt="Nigel, your coding butler (front overlay)" />
         <div class="title-inner">
           <div class="logo-container">
             <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/elevenlabs-logo-white.png?raw=true">
             <span class="logo-divider">+</span>
             <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/webfuseLogo.svg?raw=true">
           </div>
-          <img class="nigel-logo" src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true" alt="Nigel logo" />
-          <h1 class="hero-nigel"><img class="nigel-logo-inline" src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true" alt="Nigel logo" />Nigel <span id="the" class="hero-title">the</span></h1>
+          <img class="nigel-logo"
+            src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true"
+            alt="Nigel logo" />
+          <h1 class="hero-nigel"><img class="nigel-logo-inline"
+              src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/nigel-icon.png?raw=true"
+              alt="Nigel logo" />Nigel <span id="the" class="hero-title">the</span></h1>
           <div class="hero-heading-text">
             <h1 class="hero-title"><span class="red">Coding</span> Butler</h1>
           </div>
@@ -1106,17 +1217,21 @@
       </div>
 
 
+      <div class="button-container">
+        <input class="input-box" type="text" value="www.wikipedia.org" placeholder="Enter a url, sir"
+          aria-label="Nigel command" />
+        <button class="start-btn" onclick="loadNigel()">
+          <span class="start-btn__label">Call Nigel</span>
+          <span class="bell-icon">
+            <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </span>
+        </button>
 
-      <button class="start-btn" onclick="loadNigel()">
-        Call Nigel
-        <span class="bell-icon">
-          <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-        </span>
-      </button>
+      </div>
     </section>
   </div>
   <div class="nigel-graphic">
@@ -1124,48 +1239,49 @@
     <section class="slides-column" aria-label="Demo slideshow">
       <div class="demo-reel">
         <div class="demo-stack">
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-1.gif?raw=true" alt="Demo 1" class="demo-stack__item demo-stack__item--1"
-            data-quote="Make the logo spin" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-2.gif?raw=true" alt="Demo 2" class="demo-stack__item demo-stack__item--2"
-            data-quote="Make my cursor a potato" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-3.gif?raw=true" alt="Demo 3" class="demo-stack__item demo-stack__item--3"
-            data-quote="Theme this page as outer space" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-4.gif?raw=true" alt="Demo 4" class="demo-stack__item demo-stack__item--4"
-            data-quote="Throw in some great text CSS" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-5.gif?raw=true" alt="Demo 5" class="demo-stack__item demo-stack__item--5"
-            data-quote="Create a rainy effect on the page" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-6.gif?raw=true" alt="Demo 6" class="demo-stack__item demo-stack__item--6"
-            data-quote="Take me to Google and make the logo dance" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-7.gif?raw=true" alt="Demo 7" class="demo-stack__item demo-stack__item--7"
-            data-quote="Make the glow on the moon red" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-8.gif?raw=true" alt="Demo 8" class="demo-stack__item demo-stack__item--8"
-            data-quote="I want to move it around with my arrow keys " />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-9.gif?raw=true" alt="Demo 9" class="demo-stack__item demo-stack__item--9"
-            data-quote="Make my cursor look like a horse" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-1.gif?raw=true" alt="Demo 1" class="demo-stack__item demo-stack__item--1"
-            data-quote="Make the logo spin" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-2.gif?raw=true" alt="Demo 2" class="demo-stack__item demo-stack__item--2"
-            data-quote="Make my cursor a potato" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-3.gif?raw=true" alt="Demo 3" class="demo-stack__item demo-stack__item--3"
-            data-quote="Theme this page as outer space" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-4.gif?raw=true" alt="Demo 4" class="demo-stack__item demo-stack__item--4"
-            data-quote="Throw in some great text CSS" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-5.gif?raw=true" alt="Demo 5" class="demo-stack__item demo-stack__item--5"
-            data-quote="Create a rainy effect on the page" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-6.gif?raw=true" alt="Demo 6" class="demo-stack__item demo-stack__item--6"
-            data-quote="Take me to Google and make the logo dance" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-7.gif?raw=true" alt="Demo 7" class="demo-stack__item demo-stack__item--7"
-            data-quote="Make the glow on the moon red" />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-8.gif?raw=true" alt="Demo 8" class="demo-stack__item demo-stack__item--8"
-            data-quote="I want to move it around with my arrow keys " />
-          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-9.gif?raw=true" alt="Demo 9" class="demo-stack__item demo-stack__item--9"
-            data-quote="Make my cursor look like a horse" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-1.gif?raw=true" alt="Demo 1"
+            class="demo-stack__item demo-stack__item--1" data-quote="Make the logo spin" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-2.gif?raw=true" alt="Demo 2"
+            class="demo-stack__item demo-stack__item--2" data-quote="Make my cursor a potato" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-3.gif?raw=true" alt="Demo 3"
+            class="demo-stack__item demo-stack__item--3" data-quote="Theme this page as outer space" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-4.gif?raw=true" alt="Demo 4"
+            class="demo-stack__item demo-stack__item--4" data-quote="Throw in some great text CSS" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-5.gif?raw=true" alt="Demo 5"
+            class="demo-stack__item demo-stack__item--5" data-quote="Create a rainy effect on the page" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-6.gif?raw=true" alt="Demo 6"
+            class="demo-stack__item demo-stack__item--6" data-quote="Take me to Google and make the logo dance" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-7.gif?raw=true" alt="Demo 7"
+            class="demo-stack__item demo-stack__item--7" data-quote="Make the glow on the moon red" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-8.gif?raw=true" alt="Demo 8"
+            class="demo-stack__item demo-stack__item--8" data-quote="I want to move it around with my arrow keys " />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-9.gif?raw=true" alt="Demo 9"
+            class="demo-stack__item demo-stack__item--9" data-quote="Make my cursor look like a horse" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-1.gif?raw=true" alt="Demo 1"
+            class="demo-stack__item demo-stack__item--1" data-quote="Make the logo spin" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-2.gif?raw=true" alt="Demo 2"
+            class="demo-stack__item demo-stack__item--2" data-quote="Make my cursor a potato" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-3.gif?raw=true" alt="Demo 3"
+            class="demo-stack__item demo-stack__item--3" data-quote="Theme this page as outer space" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-4.gif?raw=true" alt="Demo 4"
+            class="demo-stack__item demo-stack__item--4" data-quote="Throw in some great text CSS" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-5.gif?raw=true" alt="Demo 5"
+            class="demo-stack__item demo-stack__item--5" data-quote="Create a rainy effect on the page" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-6.gif?raw=true" alt="Demo 6"
+            class="demo-stack__item demo-stack__item--6" data-quote="Take me to Google and make the logo dance" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-7.gif?raw=true" alt="Demo 7"
+            class="demo-stack__item demo-stack__item--7" data-quote="Make the glow on the moon red" />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-8.gif?raw=true" alt="Demo 8"
+            class="demo-stack__item demo-stack__item--8" data-quote="I want to move it around with my arrow keys " />
+          <img src="https://github.com/webfuse-com/nigel-butler-demo/blob/main/LP/demo-9.gif?raw=true" alt="Demo 9"
+            class="demo-stack__item demo-stack__item--9" data-quote="Make my cursor look like a horse" />
         </div>
       </div>
     </section>
   </div>
 
   <script>
+    let webfuseSession;
     (function (w, e, b, f, u, s) {
       w[f] = w[f] || {
         initSpace: function () {
@@ -1183,30 +1299,90 @@
     })(window, document, 'script', 'Webfuse');
 
     function loadNigel() {
+      let defaultToWiki = null;
+      const inputEl = document.querySelector('.input-box');
+      let inputUrl = inputEl ? String(inputEl.value || '').trim() : '';
+
+      // If empty, default to Wikipedia
+      if (!inputUrl) {
+        inputUrl = 'https://wikipedia.org';
+      }
+
+      // Ensure protocol is present
+      if (inputUrl && !/^https?:\/\//i.test(inputUrl)) {
+        inputUrl = `https://${inputUrl}`;
+      }
+      // Mobile/CTA visual feedback: switch to active styling + ring once
+      const btn = document.querySelector('.start-btn');
+      if (btn) {
+        btn.classList.add('is-calling');
+        const svg = btn.querySelector('.bell-icon svg');
+        if (svg) {
+          // restart animation reliably
+          svg.classList.remove('ring-once');
+          void svg.offsetWidth;
+          svg.classList.add('ring-once');
+          svg.addEventListener('animationend', () => svg.classList.remove('ring-once'), { once: true });
+        }
+      }
       webfuse.initSpace(
-        'wk_diIPaTnYGczhIFXol99a_WnLouiQ2oBw',
-        '1410',
+        '{{.WEBFUSE_WIDGET_KEY}}',
+        '{{.WEBFUSE_SPACE_ID}}',
         {}
       )
         .then(async space => {
-          // Create a new session
-          const session = space.session();
+          console.log('Space loaded:', space);
+          webfuseSession = space.session();
+
+          webfuseSession.on("session_started", function (session, event) {
+            webfuseSession.openTab(inputUrl);
+            defaultToWiki = setTimeout(() => {
+              console.log("URL appears to be invalid. Redirecting to Wikipedia...");
+              webfuseSession.closeTab();
+            }, 3000);
+          });
+
+          webfuseSession.on("relocate_start", function () {
+            if (defaultToWiki) {
+              clearTimeout(defaultToWiki);
+              defaultToWiki = null;
+            }
+          });
+
+          webfuseSession.on("tab_closed", function () {
+            webfuseSession.openTab("https://wikipedia.org");
+          });
 
           // Start the session
-          const response = await session.start();
+          const response = await webfuseSession.start();
         })
         .catch(error => {
           console.error('Failed:', error);
         });
     }
 
+
     document.addEventListener('DOMContentLoaded', function () {
       const buttons = document.querySelectorAll('.start-btn');
+      const inputs = document.querySelectorAll('.input-box');
+
+      // Pressing Enter in the input triggers the same flow as clicking the button
+      inputs.forEach(function (input) {
+        input.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            loadNigel();
+          }
+        });
+      });
 
       function enableStartButtons() {
         if (typeof window.loadNigel === 'function') {
           buttons.forEach(function (btn) {
             btn.classList.add('is-ready');
+          });
+          inputs.forEach(function (input) {
+            input.classList.add('is-ready');
           });
           return true;
         }
