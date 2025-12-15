@@ -1109,6 +1109,7 @@
       /* idle/load state bell color */
       .start-btn .bell-icon svg {
         stroke: var(--accent);
+        margin-right: 3px;
       }
 
       /* clicked/active state: orange button + white bell */
