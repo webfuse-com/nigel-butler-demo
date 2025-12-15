@@ -205,21 +205,6 @@
 
           webfuseSession.on("session_started", function (session, event) {
             webfuseSession.openTab(inputUrl);
-            defaultToWiki = setTimeout(() => {
-              console.log("URL appears to be invalid. Redirecting to Wikipedia...");
-              webfuseSession.closeTab();
-            }, 3000);
-          });
-
-          webfuseSession.on("relocate_start", function () {
-            if (defaultToWiki) {
-              clearTimeout(defaultToWiki);
-              defaultToWiki = null;
-            }
-          });
-
-          webfuseSession.on("tab_closed", function () {
-            webfuseSession.openTab("https://wikipedia.org");
           });
 
           // Start the session

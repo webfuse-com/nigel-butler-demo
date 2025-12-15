@@ -1,3 +1,31 @@
+//WIKI REDIRECT --START
+//////////////////////////////////////////////////////////////////////////////
+
+let wikipediaTimeout = null;
+
+//start relocate timer (5 seconds)
+browser.webfuseSession.onMessage.addListener(data => {
+    if (data.event_type === "session_started") {
+        wikipediaTimeout = setTimeout(() => {
+            console.log("Unable to load URL. Redirecting to wikipedia...");
+            webfuseSession.relocate("https://wikipedia.org", null);
+        }, 5000);
+    }
+});
+//kill timer if content script loads
+browser.runtime.onMessage.addListener(message => {
+    if (message.action === "page_loaded") {
+        console.log("Content.js loaded successfully. Redirect aborted.")
+        if (wikipediaTimeout !== null) {
+            clearTimeout(wikipediaTimeout);
+            wikipediaTimout = null;
+        }
+    }
+});
+
+//WIKI REDIRECT --END
+//////////////////////////////////////////////////////////////////////////////
+
 //POPUP SIZING ON VIEWPORT CHANGE --START
 //////////////////////////////////////////////////////////////////////////////
 
