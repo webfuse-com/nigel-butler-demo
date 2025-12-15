@@ -392,10 +392,15 @@ function handleClientEvent(evt) {
         }
 
         case "client_tool_call": {
-            // Normalize various shapes we have seen in the wild
-            const call = evt.client_tool_call || evt.agent_tool_call || evt.tool_call || {};
-            const name = call.client_tool_name || call.tool_name || call.name || call.tool || call.type || "tool";
-            currentToolName = String(name);
+            const call = evt.client_tool_call || {};
+            log("CLIENT_TOOL_CALL raw:", call);
+
+            const name = call.client_tool_name || call.tool_name || call.name;
+            const id = call.tool_call_id || call.id;
+            const args = call.parameters || call.arguments || call.args;
+
+            log("CLIENT_TOOL_CALL parsed:", { id, name, args });
+            currentToolName = String(name || "tool");
             toolActive = true;
             setStatus(`running_tool:${currentToolName}`);
             break;
@@ -639,7 +644,7 @@ async function endSession() {
     _pttPrevMuted = null;
     _pttTargetMuted = null;
     goIdleUI("endSession");
-} 
+}
 
 async function toggleMute() {
     // allow toggling UI state even before connection; SDK call will no-op until connected
